@@ -1,69 +1,46 @@
+<?php
+require_once __DIR__ . '/../core/core.php';
+require_once __DIR__ . '/layout/header.php';
+?>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Register Customer</title>
-</head>
-<body>
-	<h1>Customer Registration</h1>
+<div class="container">
+    <section class="content">
+        <h1>Customer Registration</h1>
 
-	<!-- Simple navigation so you can move between the pages of the app -->
-	<nav>
-		<a href="../index.php">Home</a> |
-		<a href="customers.php">View All Customers</a>
-	</nav>
+        <?php if (isset($_SESSION['error'])): ?>
+            <p style="color: red;">
+                <?php echo htmlspecialchars($_SESSION['error']); ?>
+            </p>
+            <?php unset($_SESSION['error']); ?>
+        <?php endif; ?>
 
-	<!--
-		Each input's "name" attribute matches a column in the `customer`
-		table (see classes/CustomerClass.php) and is what PHP reads via
-		$_POST in actions/customer_register_action.php. The "id" attribute
-		is what js/customer.js uses to read the value in the browser.
-	-->
-	<form id="registerForm">
-		<div>
-			<label>Name</label>
-			<input type="text" name="customer_name" id="customer_name">
-		</div>
-		<div>
-			<label>Email</label>
-			<input type="text" name="customer_email" id="customer_email">
-		</div>
-		<div>
-			<label>Password</label>
-			<input type="password" name="customer_pass" id="customer_pass">
-		</div>
-		<div>
-			<label>Country</label>
-			<input type="text" name="customer_country" id="customer_country">
-		</div>
-		<div>
-			<label>City</label>
-			<input type="text" name="customer_city" id="customer_city">
-		</div>
-		<div>
-			<label>Contact</label>
-			<input type="text" name="customer_contact" id="customer_contact">
-		</div>
-		<div>
-			<label>Image (optional)</label>
-			<input type="text" name="customer_image" id="customer_image">
-		</div>
-		<div>
-			<!--
-				type="button" (not "submit") stops the browser from
-				trying to reload the page. Instead, clicking it calls
-				the registerCustomer() function defined in js/customer.js.
-			-->
-			<button type="button" onclick="registerCustomer()">Register</button>
-		</div>
-	</form>
+        <form action="../actions/register_action.php" method="POST" id="registerForm">
+            <label for="customer_name">Full Name</label><br>
+            <input type="text" id="customer_name" name="customer_name" required><br><br>
 
-	<!-- Validation/success/error messages get written into here by customer.js -->
-	<p id="formMessage"></p>
+            <label for="customer_email">Email</label><br>
+            <input type="email" id="customer_email" name="customer_email" required><br><br>
 
-	<!-- Loads the shared JavaScript file that contains registerCustomer() -->
-	<script src="../js/customer.js"></script>
-</body>
-</html>
+            <label for="customer_pass">Password</label><br>
+            <input type="password" id="customer_pass" name="customer_pass" required><br><br>
+
+            <label for="customer_country">Country</label><br>
+            <input type="text" id="customer_country" name="customer_country" required><br><br>
+
+            <label for="customer_city">City</label><br>
+            <input type="text" id="customer_city" name="customer_city" required><br><br>
+
+            <label for="customer_contact">Contact Number</label><br>
+            <input type="text" id="customer_contact" name="customer_contact" required><br><br>
+
+            <label for="customer_image">Image (optional)</label><br>
+            <input type="text" id="customer_image" name="customer_image"><br><br>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p>Already have an account? <a href="login.php">Login here</a>.</p>
+    </section>
+</div>
+<script src="../js/validate.js"></script>
+<?php require_once __DIR__ . '/layout/footer.php'; ?>

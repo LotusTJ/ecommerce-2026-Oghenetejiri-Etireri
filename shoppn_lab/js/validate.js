@@ -1,53 +1,28 @@
-function registerCustomer() {
-	
-	var name = document.getElementById("customer_name").value.trim();
-	var email = document.getElementById("customer_email").value.trim();
-	var pass = document.getElementById("customer_pass").value.trim();
-	var country = document.getElementById("customer_country").value.trim();
-	var city = document.getElementById("customer_city").value.trim();
-	var contact = document.getElementById("customer_contact").value.trim();
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('registerForm');
+    if (!form) return;
 
-	
-	var messageEl = document.getElementById("formMessage");
+    form.addEventListener('submit', function (e) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const phoneRegex = /^[0-9+\-\s]{7,15}$/;
 
-	
-	var emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        const email = document.getElementById('customer_email').value.trim();
+        const contact = document.getElementById('customer_contact').value.trim();
 
-	
-	if (!name || !email || !pass || !country || !city || !contact) {
-		messageEl.textContent = "Please fill in all required fields.";
-		return;
-	}
+        let valid = true;
 
-	
-	if (!emailPattern.test(email)) {
-		messageEl.textContent = "Please enter a valid email address.";
-		return;
-	}
+        if (!emailRegex.test(email)) {
+            alert('Please enter a valid email address.');
+            valid = false;
+        }
 
-	
-	var formData = new FormData(document.getElementById("registerForm"));
+        if (!phoneRegex.test(contact)) {
+            alert('Please enter a valid contact number (7–15 digits, may include + - and spaces).');
+            valid = false;
+        }
 
-	
-	fetch("../actions/customer_register_action.php", {
-		method: "POST",
-		body: formData
-	})
-		.then(function (response) {
-			
-			return response.json();
-		})
-		.then(function (data) {
-			
-			messageEl.textContent = data.message;
-
-			
-			if (data.success) {
-				document.getElementById("registerForm").reset();
-			}
-		})
-		.catch(function () {
-			
-			messageEl.textContent = "Something went wrong. Please try again.";
-		});
-}
+        if (!valid) {
+            e.preventDefault(); //stops form from submitting if validation fails
+        }
+    });
+});

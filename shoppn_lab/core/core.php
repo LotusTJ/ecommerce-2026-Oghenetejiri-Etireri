@@ -1,5 +1,7 @@
 <?php 
 
+
+define('BASE_URL', '/~oghenetejiri.etireri/ecommerce-labs/shoppn_lab');
 if(session_status() === PHP_SESSION_NONE)
     {
         session_start(); // will Start session if session not started already
@@ -30,28 +32,28 @@ if(session_status() === PHP_SESSION_NONE)
         exit(); 
     }
 
-    function is_logged_in()
-    {
-        return isset($_SESSION['user_id']);
-    }
+   function is_logged_in()
+{
+    return isset($_SESSION['customer_id']);
+}
 
     function is_admin()
     {
         return isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true;
     }   
 
-    function require_login()
-    {
-        if (!is_logged_in()) {
-            redirect('login.php');
-        }
+   function require_login()
+{
+    if (!is_logged_in()) {
+        redirect(BASE_URL . '/views/login.php');
     }
+}
 
-    function require_admin()
-    {
-        if (!is_admin()) {
-            $_SESSION['error'] = 'You do not have permission to access this page.';
-            redirect('index.php');
-        }
+   function require_admin()
+{
+    if (!is_admin()) {
+        $_SESSION['error'] = 'You do not have permission to access this page.';
+        redirect(BASE_URL . '/index.php');
     }
+}
     

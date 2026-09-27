@@ -1,3 +1,8 @@
+<?php
+
+require_once __DIR__ . '/../../core/core.php';
+?>
+
 </main>
 
 <header>
@@ -6,8 +11,8 @@
     </div>
 
     <div class = "register-login">
-       <a href="views/register.php">Register</a> 
-        <a href="views/login.php">Login</a>
+      <a href="<?php echo BASE_URL; ?>/views/register.php">Register</a> |
+      <a href="<?php echo BASE_URL; ?>/views/login.php">Login</a>
         
     </div>
 </header>
