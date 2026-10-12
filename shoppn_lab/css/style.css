@@ -1,0 +1,50 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color: #2d4fd1;
+    color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+header .header-content h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #ffffff;
+}
+
+header .register-login a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-left: 10px;
+}
+
+header .register-login a:hover {
+    text-decoration: underline;
+}
+
+.admin-nav {
+    background-color: #511bf1;
+    padding: 8px 30px;
+}
+
+.admin-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    margin-right: 15px;
+}
+
+.admin-nav a:hover {
+    text-decoration: underline;
+}

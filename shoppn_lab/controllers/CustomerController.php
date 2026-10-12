@@ -48,7 +48,7 @@ class CustomerController
 
     public function findByEmail($email)
     {
-        return $this->customer->emailExists($email);
+        return $this->customer->findByEmail($email);
     }
 
     public function update($customer_id, $name, $email, $pass, $country, $city, $contact, $image, $role)
@@ -60,4 +60,14 @@ class CustomerController
     {
         return $this->customer->deleteCustomer($customer_id);
     }
+    public function login($email, $pass)
+{
+    $customer = $this->customer->login($email, $pass);
+
+    if ($customer) {
+        return ['success' => true, 'customer' => $customer];
+    }
+
+    return ['success' => false, 'error' => 'Invalid email or password.'];
+}
 }

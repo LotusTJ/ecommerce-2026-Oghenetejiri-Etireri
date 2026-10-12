@@ -1,15 +1,21 @@
 <?php 
 
 
-define('BASE_URL', '/~oghenetejiri.etireri/ecommerce-labs/shoppn_lab');
+if ($_SERVER['HTTP_HOST'] === 'localhost') {
+    define('BASE_URL', '/shoppn_lab');
+} else {
+    define('BASE_URL', '/~oghenetejiri.etireri/ecommerce-labs/shoppn_lab');
+}
+
 if(session_status() === PHP_SESSION_NONE)
     {
-        session_start(); // will Start session if session not started already
+        session_start(); //will Start session if session not started already
     }
 
     date_default_timezone_set('UTC');
 
     require_once __DIR__ . '/db_class.php'; //Include the database class file
+    
 
     function get_ip()
     {
@@ -39,7 +45,7 @@ if(session_status() === PHP_SESSION_NONE)
 
     function is_admin()
     {
-        return isset($_SESSION['is_admin']) && $_SESSION['is_admin'] === true;
+       return isset($_SESSION['user_role']) && (int)$_SESSION['user_role'] === 1;
     }   
 
    function require_login()

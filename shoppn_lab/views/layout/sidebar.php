@@ -1,7 +1,8 @@
 <?php
-//placeholder data until ProductController is here
-$categories = [];
-$brands = [];
+require_once __DIR__ . '/../../controllers/ProductController.php';
+$productController = new ProductController();
+$categories = $productController->getAllCategories();
+$brands = $productController->getAllBrands();
 ?>
 
 <aside class="sidebar">

@@ -2,7 +2,7 @@
 require_once __DIR__ .'/db_cred.php';
 class Database
 {
-    private $conn; 
+    protected $conn; 
 
     private $host = SERVER; 
     private $dbname = DATABASE; 

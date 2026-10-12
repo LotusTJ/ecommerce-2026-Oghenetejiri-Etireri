@@ -125,4 +125,20 @@ class CustomerClass extends Database
 
         return $this->fetchOne($sql, [$email]);
     }
+    public function getCustomerByEmail($email)
+{
+    $sql = "SELECT * FROM customer WHERE customer_email = ?";
+    return $this->fetchOne($sql, [$email]);
+}
+
+public function login($email, $pass)
+{
+    $customer = $this->findByEmail($email);
+
+    if ($customer && password_verify($pass, $customer['customer_pass'])) {
+        return $customer;
+    }
+
+    return false;
+}
 }

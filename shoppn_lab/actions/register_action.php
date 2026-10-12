@@ -36,7 +36,7 @@ if (
     strlen($contact) > 15 ||
     strlen($image) > 255
 ) {
-    $_SESSION['error'] = 'A field is exceeded maximum allowed characters.';
+    $_SESSION['error'] = 'One or more fields exceed maximum allowed character length.';
     header('Location: ../views/register.php');
     exit();
 }
